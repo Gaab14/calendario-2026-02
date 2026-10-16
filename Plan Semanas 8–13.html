@@ -1,0 +1,250 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Plan Semanas 8–13</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: una columna de semanas; cada día es una fila fecha | bloques por curso. Color = curso, rojo = evaluación. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5f6878;
+  --line: #dde1e8;
+  --alg: #1f6f8b;
+  --alg-soft: #e3f0f5;
+  --calc: #b5600f;
+  --calc-soft: #fbeedf;
+  --otros: #6a5a8c;
+  --otros-soft: #eeeaf5;
+  --eval: #c0312b;
+  --eval-soft: #fbe6e4;
+  --today: #1f6f8b;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e7eaf0; --muted: #9aa3b2; --line: #2b313c;
+    --alg: #5fb6d3; --alg-soft: #17303a; --calc: #e9a25a; --calc-soft: #3a2a18;
+    --otros: #b3a3d6; --otros-soft: #2a2538; --eval: #f07a72; --eval-soft: #3d1f1d; --today: #5fb6d3;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e7eaf0; --muted: #9aa3b2; --line: #2b313c;
+  --alg: #5fb6d3; --alg-soft: #17303a; --calc: #e9a25a; --calc-soft: #3a2a18;
+  --otros: #b3a3d6; --otros-soft: #2a2538; --eval: #f07a72; --eval-soft: #3d1f1d; --today: #5fb6d3;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.5;
+}
+.wrap {
+  max-width: 920px; margin: 0 auto;
+  padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px;
+}
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(28px, 5vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--f-display); font-weight: 600; font-size: 20px; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 62ch; margin: 8px 0 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+.next { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.next div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.next b { display: block; font-family: var(--f-display); font-size: 26px; line-height: 1; color: var(--eval); font-variant-numeric: tabular-nums; }
+.next small { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+.next p { margin: 6px 0 0; font-weight: 600; }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 24px; margin: 0; padding: 0; list-style: none; }
+.rules li { padding-left: 14px; border-left: 2px solid var(--line); min-width: 0; }
+.rules b { display: block; }
+.rules span { color: var(--muted); font-size: 14px; }
+
+.week { display: grid; gap: 10px; }
+.week-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.week-head .num { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.week-head p { margin: 0; color: var(--muted); font-size: 14px; flex-basis: 100%; }
+
+.day { display: grid; grid-template-columns: 92px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.day.is-eval { border-color: var(--eval); }
+.day.is-today { outline: 2px solid var(--today); outline-offset: 2px; }
+.day.is-past { opacity: .55; }
+.date { font-family: var(--f-mono); font-size: 13px; line-height: 1.3; }
+.date .dow { display: block; color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: .08em; }
+.date .tag { display: inline-block; margin-top: 6px; font-family: var(--f-body); font-size: 11px; font-weight: 600; background: var(--today); color: var(--surface); border-radius: 4px; padding: 1px 6px; }
+.items { display: grid; gap: 6px; min-width: 0; }
+.it { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; min-width: 0; }
+.chip { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; border-radius: 4px; padding: 1px 7px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.it span:last-child { min-width: 0; overflow-wrap: anywhere; }
+.alg .chip { background: var(--alg-soft); color: var(--alg); }
+.calc .chip { background: var(--calc-soft); color: var(--calc); }
+.otros .chip { background: var(--otros-soft); color: var(--otros); }
+.eval .chip { background: var(--eval); color: var(--surface); }
+.eval span:last-child { font-weight: 600; }
+
+.todo { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 14px 16px; }
+.todo ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+footer { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 520px) {
+  .day { grid-template-columns: 1fr; gap: 8px; }
+  .date .dow { display: inline; margin-right: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) { .day { transition: opacity .2s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Plan de estudio · semanas 8 a 13</h1>
+    <p class="lede">Del viernes 16 de octubre al LB2 del viernes 20 de noviembre. Prioridad: Algoritmos y Cálculo, sin descuidar los demás cursos, porque para la beca cuentan todos.</p>
+  </header>
+
+  <div class="legend" aria-label="Leyenda">
+    <span><i class="dot" style="background:var(--alg)"></i>Algoritmos</span>
+    <span><i class="dot" style="background:var(--calc)"></i>Cálculo I</span>
+    <span><i class="dot" style="background:var(--otros)"></i>ODE · CPL II · Seminario</span>
+    <span><i class="dot" style="background:var(--eval)"></i>Evaluación o entrega</span>
+  </div>
+
+  <section class="next" id="next" aria-label="Próximas evaluaciones"></section>
+
+  <section>
+    <h2>Reglas que se repiten todos los días</h2>
+    <ul class="rules" style="margin-top:12px">
+      <li><b>Hoja en blanco</b><span>Escribe de memoria. Si te trabas 5 min, mira solo eso, cierra y vuelve a escribir desde cero.</span></li>
+      <li><b>Ejercicio corto de 20 min</b><span>Uno por día, rotando: herencia + vector&lt;Base*&gt;, menú y validaciones, agrupar + burbuja, Form + Timer + buffer.</span></li>
+      <li><b>Cálculo: rehacer los fallados</b><span>Lo que te salió mal hoy, lo vuelves a resolver en 2 días sin mirar.</span></li>
+      <li><b>Cuaderno de errores</b><span>Todo lo que te haga perder más de 10 min, en una línea. Léelo antes de cada evaluación.</span></li>
+      <li><b>Días de clases: unas 2.5 h</b><span>1 h Algoritmos, 1 h Cálculo y 30 min para otros cursos si hay tarea.</span></li>
+      <li><b>Dormir 7 h</b><span>Lo que practicas se fija durmiendo. Una noche sin dormir te cuesta más de lo que te da.</span></li>
+    </ul>
+  </section>
+
+  <div id="weeks" style="display:grid;gap:32px"></div>
+
+  <section class="todo">
+    <h2>Por confirmar (pásamelo y actualizo el plan)</h2>
+    <ul>
+      <li>Fechas exactas de los retos de la semana 10 y la semana 12.</li>
+      <li>Fechas de las evaluaciones de Cálculo I (PC, exámenes).</li>
+      <li>Indicaciones de la TB2 y qué piden en el Hito 1.</li>
+      <li>Requisitos de la beca: promedio mínimo, orden de mérito o tercio superior.</li>
+    </ul>
+  </section>
+
+  <footer>Después de la semana 13: proyecto final de ODE en la semana 15 (30 nov – 6 dic). Los domingos de ODE desde la semana 9 son para no llegar con todo junto.</footer>
+</div>
+
+<script>
+const W = [
+  { n: "Semana 8", r: "16 – 18 oct", note: "Días libres después de parciales. Los más largos del plan: aquí recuperas Cálculo y automatizas lo de consola.", days: [
+    ["2026-10-16", [["alg","1.5 h · Ejercicios cortos en hoja en blanco: validación S/N, menú, agrupar por nombre + burbuja"],["calc","2 h · Retomar optimización: teoría y 5 ejercicios"],["otros","Anotar en el cuaderno de errores todo lo de la EA1"]]],
+    ["2026-10-17", [["alg","3 h · EA1 2026 pregunta 1 desde cero, diagrama en papel primero, sin mirar tu código. Anota el tiempo"],["calc","2 h · Optimización"]]],
+    ["2026-10-18", [["alg","3 h · EA1 2025 pregunta 1 (robot de trabajo) con cronómetro de 110 min, luego 1 h para corregir"],["calc","2 h · Integrales"],["otros","Revisar el sílabo: fechas de retos y de Cálculo"]]],
+  ]},
+  { n: "Semana 9", r: "19 – 25 oct", note: "Empiezan los gráficos en Windows Forms. Cada día practicas lo que vieron en clase.", days: [
+    ["2026-10-19", [["alg","Crear un proyecto de Windows Forms (C++/CLI) y confirmar que compila en tu VS · ejercicio corto de consola"],["calc","1 h"]]],
+    ["2026-10-20", [["alg","Dibujar figuras: FillRectangle, FillEllipse, DrawLine, FillPolygon"],["calc","1 h"]]],
+    ["2026-10-21", [["alg","Timer + BufferedGraphics: animar una figura sin parpadeo"],["calc","1 h"]]],
+    ["2026-10-22", [["alg","Mover una nave con las flechas (KeyDown) sin salirse de la ventana"],["calc","1 h"]]],
+    ["2026-10-23", [["alg","Un planeta orbitando con cos y sin, y girando sobre su eje"],["calc","1 h"],["otros","Tareas de CPL II o Seminario si hay"]]],
+    ["2026-10-24", [["alg","3 h · EA1 2026 pregunta 1 con cronómetro (meta: menos de 2 h 30)"],["otros","TB2: leer las indicaciones y coordinar con el grupo"]]],
+    ["2026-10-25", [["calc","2 h · Mezcla de optimización e integrales"],["otros","1 h · ODE: avanzar el proyecto final"]]],
+  ]},
+  { n: "Semana 10", r: "26 oct – 1 nov", note: "Sprites, mouse y colisiones: es exactamente lo que pide el LB2. Hay reto esta semana (fecha por confirmar).", days: [
+    ["2026-10-26", [["alg","Sprites: Bitmap + DrawImage con rectángulo de origen, animar por cuadros"],["calc","1 h"]]],
+    ["2026-10-27", [["alg","MouseClick: crear un personaje donde haces clic y guardarlo en una colección"],["calc","1 h"]]],
+    ["2026-10-28", [["alg","Colisiones con IntersectsWith y eliminar de la colección (con delete)"],["calc","1 h"]]],
+    ["2026-10-29", [["alg","Repaso para el reto · TB2 Hito 1: borrador del diagrama de clases"],["calc","1 h"]]],
+    ["2026-10-30", [["alg","TB2 Hito 1: historia y diseño de los niveles"],["calc","1 h"],["otros","Tareas de CPL II o Seminario si hay"]]],
+    ["2026-10-31", [["alg","3 h · LB2 2025 (panda y murciélago) completo, sin cronómetro"]]],
+    ["2026-11-01", [["otros","2 h · Hito 1 con el grupo · 1 h ODE"],["calc","2 h"]]],
+  ]},
+  { n: "Semana 11", r: "2 – 8 nov", note: "Game Jam y Hito 1 caen el mismo fin de semana. El Hito 1 tiene que estar listo el jueves para que el sábado y domingo sean solo de Game Jam.", days: [
+    ["2026-11-02", [["alg","Hito 1: terminar la presentación · ejercicio corto de 20 min"],["calc","1 h"]]],
+    ["2026-11-03", [["alg","Hito 1: revisión final con el grupo · Game Jam: repartir roles"],["calc","1 h"]]],
+    ["2026-11-04", [["alg","Game Jam: plantilla base del grupo (form, controladora, clase base, colisiones, menú y panel)"],["calc","1 h"]]],
+    ["2026-11-05", [["alg","Hito 1 listo · probar la plantilla y repasar gráficos"],["calc","1 h"]]],
+    ["2026-11-06", [["calc","1 h"],["otros","Día tranquilo: dormir bien antes del fin de semana"]]],
+    ["2026-11-07", [["eval","Game Jam día 1 · Hito 1 TB2"],["calc","30 min"]]],
+    ["2026-11-08", [["eval","Game Jam día 2 · entrega (en 2026-1 fue a las 23:30)"],["alg","Bitácora de IA, plan de actividades y video de 5 min: no dejarlos para la última hora"]]],
+  ]},
+  { n: "Semana 12", r: "9 – 15 nov", note: "Simulacros de LB2 con cronómetro. Hay reto esta semana (fecha por confirmar).", days: [
+    ["2026-11-09", [["alg","Recuperarte · ejercicio corto de 20 min"],["calc","1 h"]]],
+    ["2026-11-10", [["alg","LB2 2025 con cronómetro de 110 min"],["calc","1 h"]]],
+    ["2026-11-11", [["alg","Practicar solo el bloque en el que más tiempo perdiste"],["calc","1 h"]]],
+    ["2026-11-12", [["alg","Variante de LB2 n.º 1"],["calc","1 h"]]],
+    ["2026-11-13", [["alg","Repaso para el reto"],["calc","1 h"],["otros","Tareas de CPL II o Seminario si hay"]]],
+    ["2026-11-14", [["alg","Simulacro: variante de LB2 n.º 2 en 110 min"]]],
+    ["2026-11-15", [["calc","2 h"],["otros","1 h · ODE"]]],
+  ]},
+  { n: "Semana 13", r: "16 – 20 nov", note: "Semana del LB2. Nada nuevo a partir del miércoles: solo repetir lo que ya sabes.", days: [
+    ["2026-11-16", [["alg","Simulacro: variante de LB2 n.º 3 en 110 min"],["calc","1 h"]]],
+    ["2026-11-17", [["alg","Practicar solo el bloque débil del simulacro"],["calc","1 h"]]],
+    ["2026-11-18", [["alg","Ejercicio relámpago: Form + Timer + buffer + clic + colisión en menos de 40 min"],["calc","1 h"]]],
+    ["2026-11-19", [["alg","Leer el cuaderno de errores y descansar"],["calc","30 min ligero"],["otros","Dormir temprano"]]],
+    ["2026-11-20", [["eval","LB2 Algoritmos (110 min)"]]],
+  ]},
+];
+
+const LABEL = { alg: "Algoritmos", calc: "Cálculo", otros: "Otros", eval: "Evaluación" };
+const DOW = ["dom","lun","mar","mié","jue","vie","sáb"];
+const MES = ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
+
+function localISO(d) {
+  const p = n => String(n).padStart(2, "0");
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+const todayISO = localISO(new Date());
+
+function parse(iso) { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); }
+function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+const weeksEl = document.getElementById("weeks");
+let todayEl = null;
+W.forEach(w => {
+  const sec = document.createElement("section");
+  sec.className = "week";
+  sec.innerHTML = '<div class="week-head"><h2>' + w.n + '</h2><span class="num">' + w.r + '</span><p>' + esc(w.note) + '</p></div>';
+  w.days.forEach(([iso, items]) => {
+    const dt = parse(iso);
+    const isEval = items.some(i => i[0] === "eval");
+    const el = document.createElement("div");
+    el.className = "day" + (isEval ? " is-eval" : "") + (iso === todayISO ? " is-today" : "") + (iso < todayISO ? " is-past" : "");
+    el.innerHTML =
+      '<div class="date"><span class="dow">' + DOW[dt.getDay()] + '</span>' + dt.getDate() + ' ' + MES[dt.getMonth()] +
+      (iso === todayISO ? '<br><span class="tag">Hoy</span>' : '') + '</div>' +
+      '<div class="items">' + items.map(([c, t]) =>
+        '<div class="it ' + c + '"><span class="chip">' + LABEL[c] + '</span><span>' + esc(t) + '</span></div>').join("") + '</div>';
+    if (iso === todayISO) todayEl = el;
+    sec.appendChild(el);
+  });
+  weeksEl.appendChild(sec);
+});
+
+const EVENTS = [
+  ["2026-11-07", "Game Jam + Hito 1 TB2"],
+  ["2026-11-20", "LB2 Algoritmos"],
+  ["2026-11-30", "ODE proyecto final (semana 15)"],
+];
+const t0 = parse(todayISO);
+document.getElementById("next").innerHTML = EVENTS.map(([iso, name]) => {
+  const days = Math.round((parse(iso) - t0) / 86400000);
+  const n = days > 0 ? days : (days === 0 ? "Hoy" : "✓");
+  const lbl = days > 1 ? "días" : (days === 1 ? "día" : "");
+  const dt = parse(iso);
+  return '<div><b>' + n + '</b><small>' + lbl + (lbl ? " · " : "") + dt.getDate() + ' ' + MES[dt.getMonth()] + '</small><p>' + esc(name) + '</p></div>';
+}).join("");
+
+if (todayEl && todayEl.scrollIntoView && location.hash === "") {
+  try { todayEl.scrollIntoView({ block: "center" }); } catch (e) {}
+}
+</script>
+
+</body></html>
